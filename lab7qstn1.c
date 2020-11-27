@@ -31,7 +31,8 @@ void display(ll stack[])
 		printf("\nEmpty\n");
 	else
 	{
-		for(ll x=top;x>=0;x--)
+		printf("\nstack top to bottom: ");
+		for(ll x=0;x<=top;x++)
 			printf("%lld ",stack[x]);
 		printf("\n");
 	}

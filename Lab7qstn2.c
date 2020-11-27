@@ -1,95 +1,101 @@
-#include<stdio.h>
-#include<stdlib.h>
-void main()
+#include <stdio.h>
+#define SIZE 10
+ 
+int ar[SIZE];
+int top1 = -1;
+int top2 = SIZE;
+
+void push_stack1 (int data)
 {
-    int n,top1,top2,ch=1,a,i,arr[100];
-    printf("Enter size of array you want to use\n");
-    scanf("%d",&n);
-    top1=-1;
-    top2=n;
-    while(ch!=0)
-    {
-        printf("What do u want to do?\n");
-        printf("1.Push element in stack 1\n");
-        printf("2.Push element in stack 2\n");
-        printf("3.Pop element from stack 1\n");
-        printf("4.Pop element from stack 2\n");
-        printf("5.Display stack 1\n");
-        printf("6.Display stack 2\n");
-        printf("0.EXIT\n");
-        scanf("%d",&ch);
-        switch(ch)
-        {
-            case 1:
-            {
-                printf("Enter the element\n");
-                scanf("%d",&a);
-                if(top1!=(top2-1))
-                arr[++top1]=a;
-                else
-                printf("Overflow\n");
-                break;
-            }
-            case 2:
-            {
-                printf("Enter the element\n");
-                scanf("%d",&a);
-                if(top2!=(top1+1))
-                arr[--top2]=a;
-                else
-                printf("Overflow\n");
-                break;
-            }
-            case 3:
-            {
-                if(top1==-1)
-                    printf("Stack1 is empty\n");
-                else
-                {
-                    a=arr[top1--];
-                    printf("%d\n",a);
-                }
-                break;
-            }
-            case 4:
-            {
-                if(top2==n)
-                    printf("Stack2 is empty\n");
-                else
-                {
-                    a=arr[top2++];
-                    printf("%d\n",a);
-                }
-                break;
-            }
-            case 5:
-            {
-                if(top1==-1)
-                    printf("Stack1 is empty\n");
-                else
-                {
-                    printf("Stack1 is-->>\n");
-                    for(i=0;i<=top1;i++)
-                    printf("%d ",arr[i]);
-                    printf("\n");
-                }
-                break;
-            }
-            case 6:
-            {
-                if(top2==n)
-                    printf("Stack2 is empty\n");
-                else
-                {
-                    printf("Stack2 is-->>\n");
-                    for(i=(n-1);i>=top2;i--)
-                    printf("%d ",arr[i]);
-                    printf("\n");
-                }
-                break;
-            }
-            case 0:
-                break;
-        }
-    }
+  if (top1 < top2 - 1)
+  {
+    ar[++top1] = data;
+  }
+  else
+  {
+    printf ("Stack Full! Cannot Push\n");
+  }
+}
+void push_stack2 (int data)
+{
+  if (top1 < top2 - 1)
+  {
+    ar[--top2] = data; 
+  }
+  else
+  {
+    printf ("Stack Full! Cannot Push\n");
+  }
+}
+void pop_stack1 ()
+{
+  if (top1 >= 0)
+  {
+    int popped_value = ar[top1--];
+    printf ("%d is being popped from Stack 1\n", popped_value);
+  }
+  else
+  {
+    printf ("Stack Empty! Cannot Pop\n");
+  }
+}
+void pop_stack2 ()
+{
+  if (top2 < SIZE)
+  {
+    int popped_value = ar[top2++];
+    printf ("%d is being popped from Stack 2\n", popped_value);
+  }
+  else
+  {
+    printf ("Stack Empty! Cannot Pop\n");
+  }
+}
+void print_stack1 ()
+{
+  int i;
+  for (i = top1; i >= 0; --i)
+  {
+    printf ("%d ", ar[i]);
+  }
+  printf ("\n");
+}
+void print_stack2 ()
+{
+  int i;
+  for (i = top2; i < SIZE; ++i)
+  {
+    printf ("%d ", ar[i]);
+  }
+  printf ("\n");
+}
+int main()
+{
+  int ar[SIZE];
+  int i;
+  int num_of_ele;
+  printf ("We can push a total of 10 values\n");
+
+  for (i = 1; i <= 6; ++i)
+  {
+    push_stack1 (i);
+    printf ("Value Pushed in Stack 1 is %d\n", i);
+  }
+  for (i = 1; i <= 4; ++i)
+  {
+    push_stack2 (i);
+    printf ("Value Pushed in Stack 2 is %d\n", i);
+  }
+  print_stack1 ();
+  print_stack2 ();
+  printf ("Pushing Value in Stack 1 is %d\n", 11);
+  push_stack1 (11);
+  num_of_ele = top1 + 1;
+  while (num_of_ele)
+  {
+    pop_stack1 ();
+    --num_of_ele;
+  }
+  pop_stack1 ();
+  return 0;
 }

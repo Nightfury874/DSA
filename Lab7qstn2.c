@@ -1,101 +1,99 @@
-#include <stdio.h>
-#define SIZE 10
- 
-int ar[SIZE];
-int top1 = -1;
-int top2 = SIZE;
+#include<stdio.h>
+#include<stdlib.h>
+#define ll long long
 
-void push_stack1 (int data)
+const ll max=100000;
+ll top1=-1,top2=max;;
+
+
+void push_st1(ll stack[],ll x)
 {
-  if (top1 < top2 - 1)
-  {
-    ar[++top1] = data;
-  }
-  else
-  {
-    printf ("Stack Full! Cannot Push\n");
-  }
+	if(top1==top2-1)
+		printf("\nStack Full\n");
+	else
+	{
+		top1++;
+		stack[top1]=x;
+	}
 }
-void push_stack2 (int data)
+
+void pop_st1(ll stack[])
 {
-  if (top1 < top2 - 1)
-  {
-    ar[--top2] = data; 
-  }
-  else
-  {
-    printf ("Stack Full! Cannot Push\n");
-  }
+	if(top1<0)
+		printf("\nStack Empty\n");
+	else
+		top1--;
 }
-void pop_stack1 ()
+
+void push_st2(ll stack[],ll x)
 {
-  if (top1 >= 0)
-  {
-    int popped_value = ar[top1--];
-    printf ("%d is being popped from Stack 1\n", popped_value);
-  }
-  else
-  {
-    printf ("Stack Empty! Cannot Pop\n");
-  }
+	if(top1==top2-1)
+		printf("\nStack Full\n");
+	else
+	{
+		top2--;
+		stack[top2]=x;
+	}
 }
-void pop_stack2 ()
+
+void pop_st2(ll stack[])
 {
-  if (top2 < SIZE)
-  {
-    int popped_value = ar[top2++];
-    printf ("%d is being popped from Stack 2\n", popped_value);
-  }
-  else
-  {
-    printf ("Stack Empty! Cannot Pop\n");
-  }
+	if(top2==max)
+		printf("\nStack Empty\n");
+	else
+		top2++;
 }
-void print_stack1 ()
+
+void display(ll stack[])
 {
-  int i;
-  for (i = top1; i >= 0; --i)
-  {
-    printf ("%d ", ar[i]);
-  }
-  printf ("\n");
+	printf("\nstack1 ");
+	for(ll x=top1;x>=0;x--)
+		printf("%lld ",stack[x]);
+	printf("\nstack2 ");
+	for(ll x=top2;x<max;x++)
+		printf("%lld ",stack[x]);
 }
-void print_stack2 ()
-{
-  int i;
-  for (i = top2; i < SIZE; ++i)
-  {
-    printf ("%d ", ar[i]);
-  }
-  printf ("\n");
-}
+
+
+
 int main()
 {
-  int ar[SIZE];
-  int i;
-  int num_of_ele;
-  printf ("We can push a total of 10 values\n");
-
-  for (i = 1; i <= 6; ++i)
-  {
-    push_stack1 (i);
-    printf ("Value Pushed in Stack 1 is %d\n", i);
-  }
-  for (i = 1; i <= 4; ++i)
-  {
-    push_stack2 (i);
-    printf ("Value Pushed in Stack 2 is %d\n", i);
-  }
-  print_stack1 ();
-  print_stack2 ();
-  printf ("Pushing Value in Stack 1 is %d\n", 11);
-  push_stack1 (11);
-  num_of_ele = top1 + 1;
-  while (num_of_ele)
-  {
-    pop_stack1 ();
-    --num_of_ele;
-  }
-  pop_stack1 ();
-  return 0;
+	ll stack[max];
+	while(1)
+	{
+		printf("\nChoose: 1-input stack1 2-input stack2 3:delete stack1 4:delete stack2 5:exit\t");
+		int ch;
+		scanf("%d",&ch);
+		if(ch==5)
+			break;
+		if(ch==1)
+		{
+			ll x;
+			scanf("%lld",&x);
+			push_st1(stack,x);
+			printf("\nAfter insertion stack1:\n");
+			display(stack);
+		}
+		else if(ch==2)
+		{
+			ll x;
+			scanf("%lld",&x);
+			push_st2(stack,x);
+			printf("\nAfter insertion stack2:\n");
+			display(stack);
+		}
+		else if(ch==3){
+			pop_st1(stack);
+			printf("\nAfter deletion stack1:\n");
+			display(stack);
+		}
+		else if(ch==4){
+			pop_st2(stack);
+			printf("\nAfter deletion stack2:\n");
+			display(stack);
+		}
+		else 
+			printf("\nWrong input\n");
+	}
+	return 0;
 }

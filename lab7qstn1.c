@@ -32,7 +32,7 @@ void display(ll stack[])
 	else
 	{
 		printf("\nstack top to bottom: ");
-		for(ll x=0;x<=top;x++)
+		for(ll x=top;x>=0;x--)
 			printf("%lld ",stack[x]);
 		printf("\n");
 	}
@@ -73,6 +73,11 @@ void insert_middle(ll stack[],ll num)
 int main()
 {
 	ll stack[max];
+	push(stack,1);
+	push(stack,2);
+	push(stack,3);
+	push(stack,4);
+	push(stack,5);
 	printf("\nInitially stack: \t");
 	display(stack);
 	while(1)
